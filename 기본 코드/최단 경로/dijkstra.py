@@ -53,7 +53,7 @@ dijkstra(start)
 
 # 노드마다의 최단거리 출력
 for i in range(1, n+1):
-    if distance[i] = INF: # 중간에 연결이 끊겨 도달 못한 노드
+    if distance[i] == INF: # 중간에 연결이 끊겨 도달 못한 노드
         print("INFINITY")
     else: 
         print(distance[i])
