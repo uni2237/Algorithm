@@ -40,7 +40,7 @@ def bfs(graph, start, visited):
         print(v,end=' ')
 
         for i in graph[v]:
-            if not visited[i]: # 현재 노드의 인접노드들 중 방문안한 노드 발견시 dfs재귀적 호출
+            if not visited[i]: # 현재 노드의 인접노드들 중 방문안한 노드 발견시 큐에 삽입 후 방문처리
                 queue.append(i)
                 visited[i]=True
 
