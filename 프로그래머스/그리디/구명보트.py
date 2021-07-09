@@ -1,10 +1,20 @@
 def solution(people, limit):
+    
     answer = len(people)
-    p = sorted(people,reverse = True)
-    s,e = 0, len(p)-1
-    while s < e : 
-        if p[s]+p[e] <= limit :
-            e-=1
+    people.sort()
+
+    i=0
+    j=len(people)-1
+
+    while i<j :
+
+        if people[i]+people[j]<=limit:
             answer-=1
-        s+=1
+            i+=1
+            
+        j-=1
+        
     return answer
+
+
+
