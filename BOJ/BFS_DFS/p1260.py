@@ -1,28 +1,40 @@
-from sys import stdin
-n, m, v = map(int, stdin.readline().split())
-matrix = [[0] * (n + 1) for _ in range(n + 1)]
+import sys
+sys.stdin=open("Algorithm/input.txt","rt")
+input=sys.stdin.readline
+
+n,m,v=map(int,input().split())
+array=[[0]*(n+1) for _ in range(n+1)]
+
 for _ in range(m):
-    line = list(map(int, stdin.readline().split()))
-    matrix[line[0]][line[1]] = 1
-    matrix[line[1]][line[0]] = 1
+    a,b=map(int,input().split())
+    array[a][b],array[b][a]=1,1
 
-def bfs(start):
-    visited = [start]
-    queue = [start]
+dx=[-1,1,0,0]
+dy=[0,0,-1,1]
+
+visited=[]
+def dfs(v,array,visited):
+    visited.append(v)
+    for i in range(n+1):
+        if array[v][i]==1 and i not in visited:
+            visited=dfs(i,array,visited)
+    return visited
+
+
+from collections import deque
+def bfs(v,array):
+    queue=deque([v])
+    visited=[v]
+
     while queue:
-        n = queue.pop(0)
-        for c in range(len(matrix[start])):
-            if matrix[n][c] == 1 and (c not in visited):
-                visited.append(c)
-                queue.append(c)
+        v=queue.popleft()
+        for i in range(n+1):
+            if array[v][i]==1 and i not in visited:
+                visited.append(i)
+                queue.append(i)
     return visited
 
-def dfs(start, visited):
-    visited += [start]
-    for c in range(len(matrix[start])):
-        if matrix[start][c] == 1 and (c not in visited):
-            dfs(c, visited)
-    return visited
+print(*dfs(v,array,visited))
+print(*bfs(v,array))
 
-print(*dfs(v,[]))
-print(*bfs(v))
+
