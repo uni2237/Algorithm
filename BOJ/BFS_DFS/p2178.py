@@ -1,31 +1,27 @@
+import sys
+sys.stdin=open("Algorithm/input.txt","rt")
+input=sys.stdin.readline
+
+n,m=map(int,input().split())
+maze=[list(map(int,list(input().rstrip()))) for _ in range(n)]
+print(maze)
+
+visited= [[-1]*m for _ in range(n)]
+
+visited[0][0]=1
 from collections import deque
- 
-# dx[0], dy[0] => 오른쪽
-# dx[1], dy[1] => 왼쪽
-# dx[2], dy[2] => 아래
-# dx[3], dy[3] => 위
-dx = [0, 0, 1, -1]
-dy = [1, -1, 0, 0]
- 
-n, m = map(int, input().split())
-a = [list(map(int, list(input()))) for _ in range(n)]
-q = deque()
-check = [[False]*m for _ in range(n)]
-dist = [[0]*m for _ in range(n)]
- 
-# 시작점
-q.append((0,0))
-check[0][0] = True
-dist[0][0] = 1
- 
-while q:
-    x, y = q.popleft()
-    for k in range(4):
-        nx, ny = x+dx[k], y+dy[k]
-        if 0 <= nx < n and 0 <= ny < m:
-            if check[nx][ny] == False and a[nx][ny] == 1:
-                q.append((nx,ny))
-                dist[nx][ny] = dist[x][y] + 1
-                check[nx][ny] = True
- 
-print(dist[n-1][m-1])
+queue=deque()
+queue.append((0,0))
+
+dx=[-1,1,0,0]
+dy=[0,0,-1,1]
+
+while queue:
+    x,y=queue.popleft()
+    for i in range(4):
+        nx,ny=x+dx[i],y+dy[i]
+        if 0<=nx<n and 0<=ny<m and visited[nx][ny]==-1: # 방문 x
+            if maze[nx][ny]==1: # maze에서 1이라면(이동가능)
+                queue.append((nx,ny))
+                visited[nx][ny]=visited[x][y]+1 # 방문 비용 +1
+print(visited[n-1][m-1])
