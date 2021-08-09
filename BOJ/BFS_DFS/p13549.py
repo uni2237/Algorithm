@@ -6,26 +6,28 @@ from collections import deque
 
 n, k = map(int, input().split())
 
-q = deque()
+queue = deque()
 vis = [-1] * 200001
-q.append(n)
+
+queue.append(n)
 vis[n] = 0
 
-while q:
-    x = q.popleft()
+while queue:
+    x = queue.popleft()
     if x == k:
         print(vis[x])
         sys.exit()
-    # 순간이동해서 갈수 있는곳을 구한다.
-    if x * 2 <= 200000 and vis[x * 2] == -1:
-        vis[x * 2] = vis[x]
-        # appendleft를 통해 큐의 앞에 넣어 해당 초에 방문할 수 있도록 한다.
-        q.appendleft(x * 2)
-    # x-1 로 갈수 있는곳 1초 더한다.
+    # 순간이동
+    if 2*x <= 200000 and vis[2*x] == -1:
+        vis[2*x] = vis[x]
+        # appendleft로 순간이동 시 큐의 앞에 넣어 먼저 접근 가능하도록 함
+        queue.appendleft(2*x)
+
+    # x-1 
     if x - 1 >= 0 and vis[x - 1] == -1:
         vis[x - 1] = vis[x] + 1
-        q.append(x - 1)
-    # x+1 로 갈 수 있는곳 1초 더한다.
+        queue.append(x - 1)
+    # x+1 
     if x + 1 <= 200000 and vis[x + 1] == -1:
         vis[x + 1] = vis[x] + 1
-        q.append(x + 1)
+        queue.append(x + 1)
