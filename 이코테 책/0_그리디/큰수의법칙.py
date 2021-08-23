@@ -1,17 +1,13 @@
 import sys
+sys.stdin=open("input.txt","rt")
 input = sys.stdin.readline
 
-n,m,k = map(int,input().split())
-num = list(map(int, input().split()))
-num.sort()
+n,m,k=map(int,input().split())
+arr=sorted(list(map(int,input().split())))
 
-max=num[-1]
-min=num[-2]
+max=arr[-1]
+max2=arr[-2]
 
-count = m / (k+1)
-plus = m  - count*(k+1)
-
-
-sum = count*(max*k+min) + plus*max
-print(int(sum))
+answer=(max*k+max2)*m//(k+1) + m%(k+1)*max
+print(answer)
 
