@@ -15,5 +15,10 @@ print(max(data))
 result=0
 for i in range(n):
     target=min(list(map(int,input().split())))
+
     result=max(target,result)
+    #result = (result > target) and result or target  와 같이 해도 됨.(삼항연산자 사용)
+
+    # 파이썬 삼항연산자 -> ? 대신 and, : 대신 or 사용
+    # 혹은 result = result if (result>target) else target
 print(result)
