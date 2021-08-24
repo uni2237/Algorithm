@@ -42,7 +42,7 @@ while True:
         
         # 뒤로 갈수있음
         if map[nx][ny]==0:
-            x,y=nx,ny # 이미 방문한곳이므로 x,y만 변경해주고, visitd와 count는 변경 팔요 x 
+            x,y=nx,ny # 이미 방문한곳이므로 x,y만 변경해주고, visit과 count는 변경 팔요 x 
         # 뒤가 바다라 못감  
         else:
             break
