@@ -1,31 +1,31 @@
 import sys
-sys.stdin = open("Algorithm\input.txt","rt")
+sys.stdin = open("input.txt","rt")
 input = sys.stdin.readline
 
-n, m = map(int, input().split())
 
-graph =[ [int(x) for x in input().rstrip()] for _ in range(n)]
+n,m=map(int,input().split())
+ice=[[int(x) for x in input().rstrip()] for _ in range(n)]
 
-def dfs(x,y):
-    if x<0 or x>=n or y<0 or y>=m:
-        return 0
-
-    if graph[x][y]==0:
-        graph[x][y]=1
-        #상하좌우 
-        dfs(x-1,y)
-        dfs(x+1,y)
-        dfs(x,y-1)
-        dfs(x,y+1)
-        return 1
-    return 0
+dx=[-1,1,0,0]
+dy=[0,0,-1,1]
 
 count=0
 
+def dfs(x,y):
+    if (x<0 or x>=n) or (y<0 or y>=m):
+        return False
+    
+    if ice[x][y]==0:
+        ice[x][y]=1
+        
+        for i in range(4):
+            dfs(x+dx[i],y+dy[i])
+        return True # 연결된 칸들 다 돌때마다 True 반환
+
+    return False
+
 for i in range(n):
     for j in range(m):
-        if dfs(i,j)==1:
+        if dfs(i,j)==True: # True 나왔을때마다 한 덩어리씩임!
             count+=1
-print(count)  
-            
-
+print(count)
