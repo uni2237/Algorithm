@@ -3,13 +3,13 @@
 # ex) 9 , 90 -> a+b : 990 , b+a : 909 => 990이 909보다 큼(사전 순) -> 9가 우선순위
 from functools import cmp_to_key
 def comparator(a,b):
-    t1,t2 = a+b, b+a
-    return (int(t1) > int(t2)) - (int(t1) < int(t2))  # t1이 크다면 1, t2가 크다면 -1,  같으면 0
+    ab,ba = a+b, b+a
+    return int(ab) - int(ba)  # t1이 크다면 1, t2가 크다면 -1,  같으면 0
 
 def solution(numbers):
-    n = [str(x) for x in numbers]
-    n = sorted(n, key=cmp_to_key(comparator), reverse=True)
-    answer = str(int(''.join(n)))
+    number = [str(n) for n in numbers]
+    number = sorted(number, key=cmp_to_key(comparator), reverse=True)
+    answer = str(int(''.join(number))) # ex) 0000 -> 0 으로 바꿔주기 위해 int로 바꿨다가 다시 문자열로 바꿔줌
     return answer
 
 # version 2 - 숫자들을 문자열로 바꾼것을 *3해서 (1000이하니까) 비교 
